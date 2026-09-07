@@ -17,6 +17,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { processAndCompressImage } from "@/lib/imageUtils";
 
 interface Step6DocumentsProps {
   errors?: Record<string, string>;
@@ -36,6 +37,7 @@ export function Step6Documents({ errors = {} }: Step6DocumentsProps) {
   const { formData, updateFormData } = useAdmissionForm();
   const { toast } = useToast();
   const [viewingDoc, setViewingDoc] = useState<{ title: string; url: string } | null>(null);
+  const [uploadingDocKey, setUploadingDocKey] = useState<string | null>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   // Auto-scroll to workspace on mount
@@ -48,35 +50,48 @@ export function Step6Documents({ errors = {} }: Step6DocumentsProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleFileUpload = (
+  const handleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
     docKey: "photoUrl" | "cnicDocUrl" | "guardianCnicDocUrl" | "matricDocUrl" | "interDocUrl"
   ) => {
-    const file = e.target.files?.[0];
+    const inputElement = e.target;
+    const file = inputElement.files?.[0];
     if (!file) return;
 
-    // Validate size (max 3MB)
-    if (file.size > 3 * 1024 * 1024) {
+    // Validate size (max 8MB before compression)
+    if (file.size > 8 * 1024 * 1024) {
       toast({
         title: "File Too Large",
-        message: `${file.name} exceeds 3MB limit. Please upload a compressed file.`,
+        message: `${file.name} is larger than 8MB. Please choose a smaller file.`,
         type: "error",
       });
+      inputElement.value = "";
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === "string") {
-        updateFormData({ [docKey]: reader.result });
-        toast({
-          title: "Document Uploaded",
-          message: `${file.name} has been attached successfully.`,
-          type: "success",
-        });
-      }
-    };
-    reader.readAsDataURL(file);
+    setUploadingDocKey(docKey);
+
+    try {
+      // Compress and optimize image to high-efficiency base64 string
+      const dataUrl = await processAndCompressImage(file);
+      updateFormData({ [docKey]: dataUrl });
+      toast({
+        title: "Document Uploaded",
+        message: `${file.name} has been attached successfully.`,
+        type: "success",
+      });
+    } catch (err) {
+      console.error("Upload error:", err);
+      toast({
+        title: "Upload Failed",
+        message: "Could not read this file. Please try another image or PDF.",
+        type: "error",
+      });
+    } finally {
+      setUploadingDocKey(null);
+      // Reset input value so re-selecting same file triggers onChange cleanly
+      inputElement.value = "";
+    }
   };
 
   const removeDoc = (docKey: "photoUrl" | "cnicDocUrl" | "guardianCnicDocUrl" | "matricDocUrl" | "interDocUrl") => {
@@ -156,7 +171,12 @@ export function Step6Documents({ errors = {} }: Step6DocumentsProps) {
             className="hidden"
           />
 
-          {isUploaded ? (
+          {uploadingDocKey === docKey ? (
+            <div className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-2xl border border-blue-300 bg-blue-50 text-blue-700 text-xs font-bold animate-pulse">
+              <div className="w-3.5 h-3.5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+              Processing & Optimizing Document...
+            </div>
+          ) : isUploaded ? (
             <div className="flex items-center gap-2">
               {/* View Document Button */}
               <button
@@ -195,7 +215,7 @@ export function Step6Documents({ errors = {} }: Step6DocumentsProps) {
               className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-2xl border border-dashed border-blue-400 bg-blue-50/50 hover:bg-blue-100/60 text-blue-700 text-xs font-bold transition-all cursor-pointer select-none"
             >
               <UploadCloud className="w-4 h-4" />
-              Upload Document (Max 3MB)
+              Upload Document (Max 8MB)
             </button>
           )}
 
@@ -216,7 +236,7 @@ export function Step6Documents({ errors = {} }: Step6DocumentsProps) {
       <div className="flex items-start gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 leading-relaxed">
         <ShieldCheck className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
         <div>
-          <span className="font-bold text-slate-900">Document Upload Guidelines:</span> All uploaded files must be clearly readable. Supported file formats: <strong>JPG, PNG, or PDF</strong> (Maximum size: <strong>3MB per file</strong>). Photographs must have a plain white or light-blue background.
+          <span className="font-bold text-slate-900">Document Upload Guidelines:</span> All uploaded files must be clearly readable. Supported file formats: <strong>JPG, PNG, or PDF</strong> (Maximum size: <strong>8MB per file</strong>, automatically optimized). Photographs must have a plain white or light-blue background.
         </div>
       </div>
 
