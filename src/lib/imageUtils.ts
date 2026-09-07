@@ -1,11 +1,10 @@
 /**
- * Image compression and optimization utility
- * Compresses images client-side to ensure lightweight base64 strings (<200KB)
- * that fit easily in localStorage and comply with email attachment limits.
+ * High-performance Image Compression & Optimization Utility
+ * Uses URL.createObjectURL + HTML5 Canvas for instant, low-memory compression.
  */
 
 export async function processAndCompressImage(file: File): Promise<string> {
-  // If the file is a PDF, we cannot compress it via canvas, read it directly as Data URL
+  // If the file is a PDF, read directly as Data URL
   if (file.type === "application/pdf") {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -15,14 +14,15 @@ export async function processAndCompressImage(file: File): Promise<string> {
     });
   }
 
-  // If it's an image (JPG, PNG, WebP)
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        const MAX_WIDTH = 1280;
-        const MAX_HEIGHT = 1280;
+  // Fast image optimization via ObjectURL + Canvas
+  return new Promise((resolve) => {
+    const objectUrl = URL.createObjectURL(file);
+    const img = new Image();
+
+    img.onload = () => {
+      try {
+        const MAX_WIDTH = 1200;
+        const MAX_HEIGHT = 1200;
         let width = img.width;
         let height = img.height;
 
@@ -44,30 +44,35 @@ export async function processAndCompressImage(file: File): Promise<string> {
 
         const ctx = canvas.getContext("2d");
         if (!ctx) {
-          // Fallback to raw data url if canvas context unavailable
-          resolve(event.target?.result as string);
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.readAsDataURL(file);
+          URL.revokeObjectURL(objectUrl);
           return;
         }
 
-        // Draw with white background for transparency safety
         ctx.fillStyle = "#FFFFFF";
         ctx.fillRect(0, 0, width, height);
         ctx.drawImage(img, 0, 0, width, height);
 
-        // Compress to JPEG with 0.82 quality for sharp text and compact size (< 150KB)
         const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.82);
+        URL.revokeObjectURL(objectUrl);
         resolve(compressedDataUrl);
-      };
-
-      img.onerror = () => {
-        // Fallback to direct read
-        resolve(event.target?.result as string);
-      };
-
-      img.src = event.target?.result as string;
+      } catch {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(file);
+        URL.revokeObjectURL(objectUrl);
+      }
     };
 
-    reader.onerror = (err) => reject(err);
-    reader.readAsDataURL(file);
+    img.onerror = () => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.readAsDataURL(file);
+      URL.revokeObjectURL(objectUrl);
+    };
+
+    img.src = objectUrl;
   });
 }
