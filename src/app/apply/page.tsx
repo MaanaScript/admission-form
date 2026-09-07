@@ -14,6 +14,41 @@ import { Step7Review } from "@/components/form/Step7Review";
 import { AdmissionSlip } from "@/components/slip/AdmissionSlip";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import confetti from "canvas-confetti";
+import { PartyPopper } from "lucide-react";
+
+function triggerConfettiBlast() {
+  const duration = 3.5 * 1000;
+  const animationEnd = Date.now() + duration;
+  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+  function randomInRange(min: number, max: number) {
+    return Math.random() * (max - min) + min;
+  }
+
+  const interval: any = setInterval(function () {
+    const timeLeft = animationEnd - Date.now();
+
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
+    }
+
+    const particleCount = 50 * (timeLeft / duration);
+    // fireworks effect from left and right
+    confetti({
+      ...defaults,
+      particleCount,
+      origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      colors: ["#2563eb", "#38bdf8", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"],
+    });
+    confetti({
+      ...defaults,
+      particleCount,
+      origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      colors: ["#2563eb", "#38bdf8", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"],
+    });
+  }, 250);
+}
 import { useToast } from "@/components/ui/Toast";
 import {
   ArrowLeft,
@@ -195,6 +230,8 @@ function ApplyFormContent() {
       const result = await res.json();
 
       setSubmittedAppNo(appNo);
+      triggerConfettiBlast();
+
       toast({
         title: "Application Submitted Successfully!",
         message: result.mockMode
@@ -214,10 +251,95 @@ function ApplyFormContent() {
     }
   };
 
-  // If application is submitted, show the Official Printable Admission Slip
+  // If application is submitted, show Celebratory Banner and the Official Printable Admission Slip
   if (submittedAppNo) {
     return (
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fadeIn">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 animate-fadeIn">
+        
+        {/* GRAND CONGRATULATIONS CELEBRATION CARD */}
+        <div className="relative overflow-hidden p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-950 text-white shadow-2xl border border-blue-500/30 text-center space-y-6">
+          
+          {/* Background fireworks glow */}
+          <div className="absolute -top-20 -left-20 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+          {/* Celebration Icon with Pulse */}
+          <div className="relative mx-auto w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center shadow-lg shadow-blue-500/40 animate-bounce">
+            <PartyPopper className="w-10 h-10 sm:w-12 sm:h-12" />
+          </div>
+
+          <div className="space-y-3 max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs sm:text-sm font-bold">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              Submission Successful • Fall 2026
+            </span>
+
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+              🎉 Congratulations, {formData.fullName || "Applicant"}!
+            </h1>
+
+            {/* Translated Student Message */}
+            <p className="text-base sm:text-xl font-semibold text-blue-200">
+              Your application has been successfully submitted. You&apos;re officially on board!
+            </p>
+
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed pt-1">
+              Your admission application has been registered with the University Directorate under Reference No:
+            </p>
+
+            {/* Application Reference ID Box */}
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-inner my-2">
+              <span className="text-xs text-slate-300 font-medium">Application ID:</span>
+              <span className="text-lg sm:text-xl font-mono font-black text-amber-300 tracking-wider">
+                {submittedAppNo}
+              </span>
+            </div>
+
+            <p className="text-xs text-slate-400">
+              An official admission confirmation copy and marks verification details have been dispatched to your email address (<strong>{formData.email || "registered email"}</strong>).
+            </p>
+          </div>
+
+          {/* Quick Action Navigation Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
+            <Button
+              type="button"
+              variant="primary"
+              size="lg"
+              leftIcon={Printer}
+              onClick={() => window.print()}
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold shadow-lg shadow-emerald-500/30 cursor-pointer"
+            >
+              Print Admission Slip & Voucher
+            </Button>
+
+            <Link href={`/track`}>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                leftIcon={Search}
+                className="bg-white/10 hover:bg-white/20 text-white border-white/30 cursor-pointer"
+              >
+                Track Status
+              </Button>
+            </Link>
+
+            <Link href="/">
+              <Button
+                type="button"
+                variant="ghost"
+                size="lg"
+                className="text-slate-300 hover:text-white hover:bg-white/10 cursor-pointer"
+              >
+                Back to Home
+              </Button>
+            </Link>
+          </div>
+
+        </div>
+
+        {/* PRINTABLE ADMISSION SLIP CONTAINER */}
         <AdmissionSlip
           applicationNo={submittedAppNo}
           formData={formData}
@@ -226,6 +348,7 @@ function ApplyFormContent() {
             setStep(1);
           }}
         />
+
       </div>
     );
   }
