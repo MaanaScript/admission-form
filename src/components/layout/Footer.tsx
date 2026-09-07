@@ -13,7 +13,7 @@ export function Footer() {
               <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <span className="font-bold text-lg text-white">Zynox University</span>
+              <span className="font-bold text-base text-white">Christian College Business Arts & Technology (CCBAT)</span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
               Empowering future leaders through quality education, modern research facilities, and industry-aligned academic programs.
@@ -61,7 +61,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>admissions@zynox.edu.pk</span>
+                <span>admissions@ccbat.edu.pk</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-blue-400 shrink-0" />
@@ -76,18 +76,18 @@ export function Footer() {
             <p className="text-xs text-slate-400 flex items-start gap-2.5 leading-relaxed">
               <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
               <span>
-                Sector B, Education City, Main Boulevard, Lahore, Pakistan.
+                Christian College Campus, Main Boulevard, Lahore, Pakistan.
               </span>
             </p>
             <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 text-[11px] text-slate-400">
-              <strong>Need Help?</strong> Visit the Admission Directorate Counter 4 for on-spot guidance and fee voucher queries.
+              <strong>Need Help?</strong> Visit the CCBAT Admission Directorate Counter for on-spot guidance and fee voucher queries.
             </div>
           </div>
 
         </div>
 
         <div className="mt-12 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 Zynox University Admissions Directorate. All rights reserved.</p>
+          <p>© 2026 Christian College Business Arts & Technology (CCBAT) Admissions Directorate. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-slate-400">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-slate-400">Terms of Admission</Link>

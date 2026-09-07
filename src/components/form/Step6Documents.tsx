@@ -327,7 +327,7 @@ export function Step6Documents({ errors = {} }: Step6DocumentsProps) {
 
             {/* Modal Footer */}
             <div className="p-4 border-t border-slate-100 flex items-center justify-between bg-white">
-              <span className="text-xs text-slate-500">Zynox University Document Verification</span>
+              <span className="text-xs text-slate-500">Christian College (CCBAT) Document Verification</span>
               <button
                 type="button"
                 onClick={() => setViewingDoc(null)}

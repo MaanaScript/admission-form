@@ -1,7 +1,7 @@
 {
   "name": "form",
   "version": "1.0.0",
-  "description": "Zynox University Online Admission Form Portal",
+  "description": "Christian College Business Arts & Technology (CCBAT) Online Admission Form Portal",
   "main": "index.js",
   "scripts": {
     "dev": "next dev -H 0.0.0.0",

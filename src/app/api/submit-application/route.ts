@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
 
     // Send the email to the admin/college address with all attachments
     const mailOptions = {
-      from: `"Zynox Admissions" <${smtpEmail}>`,
+      from: `"CCBAT Admissions" <${smtpEmail}>`,
       to: receiverEmail,
       subject: `🎓 New Admission Form: ${appNo} - ${formData.fullName} (${formData.program})`,
       html: htmlContent,

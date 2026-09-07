@@ -5,8 +5,8 @@ import { Footer } from "@/components/layout/Footer";
 import { ToastProvider } from "@/components/ui/Toast";
 
 export const metadata: Metadata = {
-  title: "Zynox University — Online Student Admission Portal 2026",
-  description: "Apply online for Undergraduate and Graduate Degree Programs Fall 2026 at Zynox University. Easy 7-step admission form with real-time status tracking.",
+  title: "Christian College Business Arts & Technology (CCBAT) — Online Admission Portal 2026",
+  description: "Apply online for Degree Programs Fall 2026 at Christian College Business Arts & Technology (CCBAT). Easy 7-step admission form with real-time status tracking.",
 };
 
 export default function RootLayout({

@@ -282,7 +282,7 @@ export default function AdminPage() {
             type="button"
             onClick={() => {
               import("@/lib/exportUtils").then(({ exportMeritListToCSV }) => {
-                exportMeritListToCSV(applicantsList, "Zynox_University_Fall_2026_Official_Merit_List.csv", true);
+                exportMeritListToCSV(applicantsList, "CCBAT_Fall_2026_Official_Merit_List.csv", true);
                 toast({
                   title: "Official Merit List Exported",
                   message: "Downloaded official 1st Merit List ranked by aggregate score.",

@@ -23,7 +23,7 @@ export function generateAdmissionEmailHtml(data: FormDataType, appNo: string): s
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Admission Application - Zynox University</title>
+  <title>New Admission Application - Christian College Business Arts & Technology (CCBAT)</title>
   <style>
     body {
       margin: 0;
@@ -146,7 +146,7 @@ export function generateAdmissionEmailHtml(data: FormDataType, appNo: string): s
     
     <!-- HEADER -->
     <div class="header">
-      <h1>Zynox University</h1>
+      <h1>Christian College Business Arts & Technology (CCBAT)</h1>
       <p>Directorate of Admissions & Student Affairs — Fall 2026</p>
       <div class="app-badge">Application Ref: ${appNo}</div>
     </div>
@@ -155,7 +155,7 @@ export function generateAdmissionEmailHtml(data: FormDataType, appNo: string): s
     <div class="content">
       
       <p style="font-size: 14px; margin-top: 0; line-height: 1.6; color: #334155;">
-        A new online admission application has been successfully submitted on the Zynox University Admissions Portal. Complete applicant profile and academic records are detailed below:
+        A new online admission application has been successfully submitted on the Christian College Business Arts & Technology (CCBAT) Admissions Portal. Complete applicant profile and academic records are detailed below:
       </p>
 
       <!-- MERIT BANNER -->
@@ -351,8 +351,8 @@ export function generateAdmissionEmailHtml(data: FormDataType, appNo: string): s
 
     <!-- FOOTER -->
     <div class="footer">
-      <p style="margin: 0; font-weight: 700; color: #334155;">Zynox University Admissions Directorate</p>
-      <p style="margin: 4px 0 0 0;">Sector H-9, Islamabad / Canal Road, Lahore, Pakistan | admissions@zynox.edu.pk</p>
+      <p style="margin: 0; font-weight: 700; color: #334155;">Christian College Business Arts & Technology (CCBAT) Admissions Directorate</p>
+      <p style="margin: 4px 0 0 0;">Lahore, Pakistan | admissions@ccbat.edu.pk</p>
       <p style="margin: 8px 0 0 0; font-size: 11px; color: #94a3b8;">This is an automated institutional notification generated upon online admission form submission.</p>
     </div>
 

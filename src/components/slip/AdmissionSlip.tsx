@@ -94,7 +94,7 @@ export function AdmissionSlip({
             </div>
             <div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 uppercase">
-                Zynox University
+                Christian College Business Arts & Technology (CCBAT)
               </h1>
               <p className="text-xs font-bold uppercase tracking-widest text-blue-700 print:text-black">
                 Directorate of Admissions & Student Affairs — Fall 2026
@@ -230,7 +230,7 @@ export function AdmissionSlip({
               <p><strong>Processing Fee:</strong> PKR 2,000/- (Non-Refundable)</p>
               <p><strong>Bank Account:</strong> Habib Bank Limited (HBL) A/C # 0123-4567890123</p>
               <p><strong>Fee Due Date:</strong> Within 3 days of submission</p>
-              <p><strong>Test Center:</strong> Main Auditorium, Zynox University Lahore</p>
+              <p><strong>Test Center:</strong> Main Auditorium, Christian College (CCBAT) Lahore</p>
             </div>
             <ul className="list-disc pl-4 text-[11px] text-slate-700 space-y-0.5 pt-1 border-t border-slate-200">
               <li>Please bring this printed Admission Slip along with original CNIC on the entry test & document verification date.</li>

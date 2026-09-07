@@ -240,7 +240,7 @@ export function validateStep5(data: FormDataType): { isValid: boolean; errors: R
   }
 
   if (!data.referralSource) {
-    errors.referralSource = "Please select how you learned about Zynox University.";
+    errors.referralSource = "Please select how you learned about Christian College Business Arts & Technology (CCBAT).";
   }
 
   if (!data.shift) {

@@ -6,7 +6,7 @@ import { ApplicantRecord } from "@/components/admin/DataTable";
  */
 export function exportMeritListToCSV(
   applicants: ApplicantRecord[],
-  filename: string = "Zynox_University_Merit_List_Fall_2026.csv",
+  filename: string = "CCBAT_Merit_List_Fall_2026.csv",
   onlyApproved: boolean = false
 ) {
   const recordsToExport = onlyApproved

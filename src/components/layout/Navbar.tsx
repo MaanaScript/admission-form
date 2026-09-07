@@ -26,8 +26,11 @@ export function Navbar() {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-xl tracking-tight text-slate-900">Zynox University</span>
-                <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-800">
+                <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900">CCBAT</span>
+                <span className="hidden sm:inline-block text-xs font-semibold text-slate-600 truncate max-w-[280px]">
+                  • Christian College Business Arts & Technology
+                </span>
+                <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-800 shrink-0">
                   <Sparkles className="w-3 h-3 text-blue-600" />
                   Fall 2026
                 </span>

@@ -367,7 +367,7 @@ export function Step7Review({ onSubmit, isSubmitting = false, errors = {} }: Ste
               )}
             </div>
             <div className="text-xs text-slate-700 leading-relaxed">
-              <strong>Institutional Undertaking:</strong> I agree to abide by all the rules, discipline regulations, academic policies, and fee schedule prescribed by Zynox University.
+              <strong>Institutional Undertaking:</strong> I agree to abide by all the rules, discipline regulations, academic policies, and fee schedule prescribed by Christian College Business Arts & Technology (CCBAT).
             </div>
           </label>
 

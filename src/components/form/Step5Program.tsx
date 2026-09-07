@@ -123,7 +123,7 @@ export function Step5Program({ errors = {} }: Step5ProgramProps) {
   ];
 
   const referralOptions = [
-    { value: "University Website / Search", label: "Zynox University Official Website" },
+    { value: "University Website / Search", label: "Christian College (CCBAT) Official Website" },
     { value: "Social Media", label: "Social Media (Instagram / Facebook / LinkedIn / YouTube)" },
     { value: "Alumni / Senior Students", label: "Alumni or Current University Students" },
     { value: "Newspaper / Print Ad", label: "National Newspaper / Billboard Ad" },
@@ -247,7 +247,7 @@ export function Step5Program({ errors = {} }: Step5ProgramProps) {
           {/* Referral Source */}
           <Select
             id="referralSource"
-            label="How did you learn about Zynox University?"
+            label="How did you learn about Christian College Business Arts & Technology (CCBAT)?"
             required
             placeholder="Select Source"
             icon={Info}

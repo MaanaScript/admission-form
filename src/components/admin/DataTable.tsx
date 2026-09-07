@@ -94,7 +94,7 @@ export function DataTable({ applicants, onSelectApplicant }: DataTableProps) {
   const handleExportFiltered = () => {
     exportMeritListToCSV(
       filteredApplicants,
-      "Zynox_University_Filtered_Merit_List_Fall_2026.csv",
+      "CCBAT_Filtered_Merit_List_Fall_2026.csv",
       false
     );
     toast({
@@ -108,7 +108,7 @@ export function DataTable({ applicants, onSelectApplicant }: DataTableProps) {
     const approvedCount = applicants.filter((a) => a.status === "APPROVED").length;
     exportMeritListToCSV(
       applicants,
-      "Zynox_University_Official_1st_Merit_List_Fall_2026.csv",
+      "CCBAT_Official_1st_Merit_List_Fall_2026.csv",
       true
     );
     toast({

@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import { FormDataType, initialFormData, FORM_STEPS } from "@/types/form";
 import { useToast } from "@/components/ui/Toast";
 
-const LOCAL_STORAGE_KEY = "zynox_admission_draft_v1";
+const LOCAL_STORAGE_KEY = "ccbat_admission_draft_v1";
 
 interface FormContextType {
   formData: FormDataType;

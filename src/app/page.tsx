@@ -71,7 +71,8 @@ export default function HomePage() {
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
               Begin Your Future at <br />
-              <span className="gradient-text">Zynox University</span>
+              <span className="gradient-text">Christian College Business Arts & Technology</span>
+              <span className="block text-2xl sm:text-3xl text-blue-600 font-bold mt-1">(CCBAT)</span>
             </h1>
 
             {/* Subtitle */}
