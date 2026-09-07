@@ -280,7 +280,7 @@ function ApplyFormContent() {
 
             {/* Student Message */}
             <p className="text-base sm:text-xl font-semibold text-blue-200">
-              Your application has been successfully submitted. Aap officially abh student ban gaye hain!
+              Your application has been successfully submitted. Now you are officially Gay, and part of Gay family.
             </p>
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed pt-1">
