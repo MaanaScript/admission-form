@@ -278,9 +278,9 @@ function ApplyFormContent() {
               🎉 Congratulations, {formData.fullName || "Applicant"}!
             </h1>
 
-            {/* Translated Student Message */}
+            {/* Student Message */}
             <p className="text-base sm:text-xl font-semibold text-blue-200">
-              Your application has been successfully submitted. You&apos;re officially on board!
+              Your application has been successfully submitted. Aap officially abh student ban gaye hain!
             </p>
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed pt-1">
